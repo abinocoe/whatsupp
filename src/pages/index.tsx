@@ -8,6 +8,6 @@ const IndexPage = () => (
     <SEO title="Home" keywords={[`application`, `react`]} />
     <h1>Whatsupp</h1>
   </Layout>
-)
+);
 
 export default IndexPage
