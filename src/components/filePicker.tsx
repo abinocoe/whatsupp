@@ -1,42 +1,44 @@
-import React, { Component, FormEvent, SyntheticEvent } from "react"
-
-interface State {
-  file?: File
-}
+import React, {
+  FormEvent,
+  FunctionComponent,
+  SyntheticEvent,
+  useState,
+} from "react"
 
 interface HTMLInputEvent extends SyntheticEvent {
   target: HTMLInputElement & EventTarget
 }
 
-class FilePicker extends Component<{}, State> {
-  private fileReader = new FileReader()
+const FilePicker: FunctionComponent = () => {
+  const fileReader = new FileReader()
+  const [file, setFile] = useState<File>()
 
-  private handleFileRead = (_event: Event) => {
-    const result = this.fileReader.result
+  const handleFileRead = (_event: Event) => {
+    const result = fileReader.result
     console.log(result)
   }
 
-  private onFormSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    this.fileReader.onloadend = this.handleFileRead
-    if (this.state.file) this.fileReader.readAsText(this.state.file)
-  }
-
-  private onChange = (event: HTMLInputEvent) => {
+  const onChange = (event: HTMLInputEvent) => {
     if (event.target.files) {
-      this.setState({ file: event.target.files[0] })
+      setFile(event.target.files[0])
     }
   }
 
-  public render() {
-    return (
-      <form onSubmit={this.onFormSubmit}>
-        <h1>File Upload</h1>
-        <input type="file" accept=".txt" onChange={this.onChange} />
-        <button type="submit">Upload</button>
-      </form>
-    )
+  const onFormSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    fileReader.onloadend = handleFileRead
+    if (file) {
+      fileReader.readAsText(file)
+    }
   }
+
+  return (
+    <form onSubmit={onFormSubmit}>
+      <h1>File Upload</h1>
+      <input type="file" accept=".txt" onChange={onChange} />
+      <button type="submit">Upload</button>
+    </form>
+  )
 }
 
 export default FilePicker
