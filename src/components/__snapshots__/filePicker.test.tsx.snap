@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilePicker renders correctly 1`] = `ShallowWrapper {}`;

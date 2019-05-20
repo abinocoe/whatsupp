@@ -77,9 +77,6 @@ const sendToAPI = (object: { [key: string]: MessageObject }) => {
 
 const calculateTotals = (object: { [key: string]: MessageObject }) => {
   Object.entries(object).forEach(([key, value]) => {
-    console.log(value)
-    console.log(value.analysisResponse)
-    console.log(object[key].analysisResponse)
     value.analysisResponse.forEach((sentence: any) => {
       if (sentence.sentiment.score >= 0.3) {
         ++object[key].totals.positive

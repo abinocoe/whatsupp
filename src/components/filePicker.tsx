@@ -15,6 +15,7 @@ const FilePicker: FunctionComponent = () => {
   const fileReader = new FileReader()
   const [file, setFile] = useState<File>()
 
+  // tslint:disable-next-line: variable-name
   const handleFileRead = async (_event: Event) => {
     const result = fileReader.result
     let manipulatedResult
