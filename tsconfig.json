@@ -1,6 +1,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "*": ["types/*"] },
     "target": "es6",
     "module": "es2015",
     "lib": ["dom", "es2015", "es2017"],
@@ -13,5 +15,5 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
   },
-  "include": ["./src/**/*", "setupTest.js"]
+  "include": ["./src/**/*", "setupTest.js", "types/react-helmet.d.ts"]
 }

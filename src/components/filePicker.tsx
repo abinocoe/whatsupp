@@ -5,6 +5,8 @@ import React, {
   useState,
 } from "react"
 
+import chatManipulator from "../lib/chatManipulator"
+
 interface HTMLInputEvent extends SyntheticEvent {
   target: HTMLInputElement & EventTarget
 }
@@ -13,9 +15,13 @@ const FilePicker: FunctionComponent = () => {
   const fileReader = new FileReader()
   const [file, setFile] = useState<File>()
 
-  const handleFileRead = (_event: Event) => {
+  const handleFileRead = async (_event: Event) => {
     const result = fileReader.result
-    console.log(result)
+    let manipulatedResult
+    if (typeof result === "string") {
+      manipulatedResult = await chatManipulator(result)
+      console.log(manipulatedResult)
+    }
   }
 
   const onChange = (event: HTMLInputEvent) => {
