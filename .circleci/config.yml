@@ -53,8 +53,9 @@ jobs:
 
   deploy:
     docker:
-      # specify the version you desire here
       - image: circleci/node:10.15.3
+
+      working_directory: ~/whatsupp
 
     steps:
       # install pip
