@@ -12,7 +12,11 @@ interface HTMLInputEvent extends SyntheticEvent {
 }
 
 const FilePicker: FunctionComponent = () => {
-  const fileReader = new FileReader()
+  let fileReader: FileReader;
+  if (typeof window !== `undefined`) {
+    fileReader = new FileReader()
+  }
+  
   const [file, setFile] = useState<File>()
 
   // tslint:disable-next-line: variable-name
