@@ -60,6 +60,9 @@ jobs:
     steps:
       - checkout
       # install pip
+      - attach_workspace:
+        at: ~/whatsapp/public
+
       - run:
           name: Install dependencies
           command: sudo apt install python-pip python-dev
