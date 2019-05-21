@@ -31,7 +31,7 @@ jobs:
       # install pip
       - run:
           name: Install dependencies
-          command: apt install python-pip python-dev
+          command: sudo apt install python-pip python-dev
 
       - run: yarn install
 
