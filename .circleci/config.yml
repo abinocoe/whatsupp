@@ -58,13 +58,14 @@ jobs:
     working_directory: ~/whatsupp
 
     steps:
+      - checkout
       # install pip
       - run:
           name: Install dependencies
           command: sudo apt install python-pip python-dev
 
       - aws-s3/sync:
-          from: ~/whatsapp
+          from: ~/whatsapp/public
           to: "s3://whatsupp"
           overwrite: true
 
