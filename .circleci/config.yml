@@ -52,6 +52,11 @@ jobs:
       - image: circleci/node:10.15.3
 
     steps:
+      # install pip
+      - run:
+          name: Install dependencies
+          command: sudo apt install python-pip python-dev
+
       - aws-s3/sync:
           from: "public"
           to: "s3://whatsupp"
