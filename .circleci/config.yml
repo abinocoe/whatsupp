@@ -63,7 +63,7 @@ jobs:
           command: sudo apt install python-pip python-dev
 
       - aws-s3/sync:
-          from: public/
+          from: ~/whatsapp/public/
           to: "s3://whatsupp"
           overwrite: true
 
