@@ -31,11 +31,10 @@ jobs:
       # install pip
       - run:
           name: Install dependencies
+          # command: apt install python-pip python-dev
           command: |
-            apt-get -y -qq update
-            apt-get -y -qq install python3.4-dev
-            curl -O https://bootstrap.pypa.io/get-pip.py
-            python3.4 get-pip.py --user
+            apk add --no-cache \
+              py-pip=9.0.0-r1
 
       - run: yarn install
 
