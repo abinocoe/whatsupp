@@ -31,10 +31,7 @@ jobs:
       # install pip
       - run:
           name: Install dependencies
-          # command: apt install python-pip python-dev
-          command: |
-            apk add --no-cache \
-              py-pip=9.0.0-r1
+          command: apt install python-pip python-dev
 
       - run: yarn install
 
