@@ -5,6 +5,7 @@
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
 
+// @ts-ignore
 import { graphql, StaticQuery } from "gatsby"
 import React, { ReactNode } from "react"
 
@@ -26,7 +27,7 @@ const Layout = ({ children }: Props) => (
         }
       }
     `}
-    render={data => (
+    render={(data: any) => (
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
         <div

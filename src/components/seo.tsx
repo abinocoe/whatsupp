@@ -5,21 +5,22 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import { graphql, useStaticQuery } from "gatsby";
-import React from "react";
-import Helmet from "react-helmet";
+// @ts-ignore
+import { graphql, useStaticQuery } from "gatsby"
+import React from "react"
+import Helmet from "react-helmet"
 
 interface MetaContent {
-  name: string;
-  content: string;
+  name: string
+  content: string
 }
 
 interface Props {
-  description?: string;
-  lang?: string;
-  meta?: MetaContent[];
-  keywords?: string[];
-  title: string;
+  description?: string
+  lang?: string
+  meta?: MetaContent[]
+  keywords?: string[]
+  title: string
 }
 
 const SEO = ({
@@ -27,7 +28,7 @@ const SEO = ({
   lang = `en`,
   meta = [],
   keywords = [],
-  title
+  title,
 }: Props) => {
   const { site } = useStaticQuery(
     graphql`
@@ -41,62 +42,62 @@ const SEO = ({
         }
       }
     `
-  );
+  )
 
-  const metaDescription = description || site.siteMetadata.description;
+  const metaDescription = description || site.siteMetadata.description
 
   return (
     <Helmet
       htmlAttributes={{
-        lang
+        lang,
       }}
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
         {
           content: metaDescription,
-          name: `description`
+          name: `description`,
         },
         {
           content: title,
-          property: `og:title`
+          property: `og:title`,
         },
         {
           content: metaDescription,
-          property: `og:description`
+          property: `og:description`,
         },
         {
           content: `website`,
-          property: `og:type`
+          property: `og:type`,
         },
         {
           content: `summary`,
-          name: `twitter:card`
+          name: `twitter:card`,
         },
         {
           content: site.siteMetadata.author,
-          name: `twitter:creator`
+          name: `twitter:creator`,
         },
         {
           content: title,
-          name: `twitter:title`
+          name: `twitter:title`,
         },
         {
           content: metaDescription,
-          name: `twitter:description`
-        }
+          name: `twitter:description`,
+        },
       ]
         .concat(
           keywords.length > 0
             ? {
                 content: keywords.join(`, `),
-                name: `keywords`
+                name: `keywords`,
               }
             : []
         )
         .concat(meta)}
     />
-  );
-};
+  )
+}
 
-export default SEO;
+export default SEO
