@@ -1,11 +1,9 @@
-
 ########################
 
 version: 2.1
 
 orbs:
   aws-s3: circleci/aws-s3@1.0.0 #imports the s3 orb in the circleci namespace
-
 
 jobs:
   build:
@@ -39,22 +37,25 @@ jobs:
 
       # run tests!
       - run: yarn test
-      
+
       # build
       - run: yarn build
-    
-    deploy:
-      steps:
-        - aws-s3/sync:
-            from: public/
-            to: "s3://whatsupp"
-                overwrite: true
 
+  deploy:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.15.3
+
+    steps:
+      - aws-s3/sync:
+          from: "public"
+          to: "s3://whatsupp"
+          overwrite: true
 
 workflows:
   version: 2
   build_and_deploy:
-    jobs: 
+    jobs:
       - build
       - deploy:
           requires:
