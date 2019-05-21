@@ -46,6 +46,11 @@ jobs:
       # build
       - run: yarn build
 
+      - persist_to_workspace:
+          root: /public
+          paths:
+            - .
+
   deploy:
     docker:
       # specify the version you desire here
@@ -58,7 +63,7 @@ jobs:
           command: sudo apt install python-pip python-dev
 
       - aws-s3/sync:
-          from: "public"
+          from: public/
           to: "s3://whatsupp"
           overwrite: true
 
