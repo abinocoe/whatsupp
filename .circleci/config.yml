@@ -55,7 +55,7 @@ jobs:
     docker:
       - image: circleci/node:10.15.3
 
-      working_directory: ~/whatsupp
+    working_directory: ~/whatsupp
 
     steps:
       # install pip
