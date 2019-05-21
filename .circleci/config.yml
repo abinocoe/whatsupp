@@ -61,7 +61,7 @@ jobs:
       - checkout
       # install pip
       - attach_workspace:
-        at: ~/whatsapp/public
+          at: ~/whatsapp
 
       - run:
           name: Install dependencies
