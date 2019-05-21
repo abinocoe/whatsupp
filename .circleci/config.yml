@@ -47,9 +47,9 @@ jobs:
       - run: yarn build
 
       - persist_to_workspace:
-          root: /public
+          root: ~/whatsupp
           paths:
-            - .
+            - public
 
   deploy:
     docker:
