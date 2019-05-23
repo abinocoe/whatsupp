@@ -1,5 +1,7 @@
 import { post } from "axios"
 
+import { NLKEY } from "../../config"
+
 interface MessageObject {
   messages: string
   count: number
@@ -56,9 +58,7 @@ const populateMessageArrays = (messageArray: string[]) => {
 const sendToAPI = (object: { [key: string]: MessageObject }) => {
   const array = Object.entries(object).map(async ([key, value]) => {
     object[key].analysisResponse = await post(
-      `https://language.googleapis.com/v1/documents:analyzeSentiment?key=${
-        process.env.NATURAL_LANGUAGE_API_KEY
-      }`,
+      `https://language.googleapis.com/v1/documents:analyzeSentiment?key=${NLKEY}`,
       {
         document: {
           content: value.messages,
