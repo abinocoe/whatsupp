@@ -11,12 +11,15 @@ interface HTMLInputEvent extends SyntheticEvent {
   target: HTMLInputElement & EventTarget
 }
 
-const FilePicker: FunctionComponent = () => {
-  let fileReader: FileReader;
+const FilePicker: FunctionComponent<{
+  updateResults: (results: any) => void
+  updateAnalysing: (isAnalysing: boolean) => void
+}> = ({ updateAnalysing, updateResults }) => {
+  let fileReader: FileReader
   if (typeof window !== `undefined`) {
     fileReader = new FileReader()
   }
-  
+
   const [file, setFile] = useState<File>()
 
   // tslint:disable-next-line: variable-name
@@ -24,8 +27,11 @@ const FilePicker: FunctionComponent = () => {
     const result = fileReader.result
     let manipulatedResult
     if (typeof result === "string") {
+      updateAnalysing(true)
       manipulatedResult = await chatManipulator(result)
       console.log(manipulatedResult)
+      updateResults(manipulatedResult)
+      updateAnalysing(false)
     }
   }
 
