@@ -1,4 +1,5 @@
 import React from "react"
+
 import ResultItem from "./resultItem"
 
 const Results = ({ results }: any) => {
@@ -6,7 +7,9 @@ const Results = ({ results }: any) => {
     <div
       style={{
         display: "flex",
+        flex: 1,
         flexDirection: "row",
+        flexWrap: "wrap",
         justifyContent: "space-around",
       }}
     >

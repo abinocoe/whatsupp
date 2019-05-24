@@ -29,7 +29,6 @@ const FilePicker: FunctionComponent<{
     if (typeof result === "string") {
       updateAnalysing(true)
       manipulatedResult = await chatManipulator(result)
-      console.log(manipulatedResult)
       updateResults(manipulatedResult)
       updateAnalysing(false)
     }

@@ -4,10 +4,11 @@ const resultItem = ({ name, messageCount, totals }: any) => {
   return (
     <div
       style={{
-        borderColor: "black",
-        borderWidth: 1,
-        borderStyle: "solid",
         backgroundColor: "papayawhip",
+        borderColor: "black",
+        borderStyle: "solid",
+        borderWidth: 1,
+        maxWidth: "30%",
         padding: 20,
       }}
     >
