@@ -13,7 +13,6 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" keywords={[`application`, `react`]} />
-      <h1>Whatsupp</h1>
       <div style={{ display: "flex", minHeight: 380 }}>
         {!results && !analysing && <Instructions />}
         {analysing && <AnalysingAnimation />}

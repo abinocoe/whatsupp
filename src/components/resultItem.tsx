@@ -1,22 +1,17 @@
 import React from "react"
 
+import "./resultItem.css"
+
 const resultItem = ({ name, messageCount, totals }: any) => {
   return (
-    <div
-      style={{
-        backgroundColor: "papayawhip",
-        borderColor: "black",
-        borderStyle: "solid",
-        borderWidth: 1,
-        maxWidth: "30%",
-        padding: 20,
-      }}
-    >
-      <h2>{name}</h2>
-      <p>Positive: {totals.positive}%</p>
-      <p>Neutral: {totals.neutral}%</p>
-      <p>Negative: {totals.negative}%</p>
-      <p>over {messageCount} messages</p>
+    <div className="result-card">
+      <h2 style={{ color: "#5b5259" }}>{name}</h2>
+      <div>
+        <p style={{ color: "green" }}>Positive: {totals.positive}%</p>
+        <p style={{ color: "orange" }}>Neutral: {totals.neutral}%</p>
+        <p style={{ color: "red" }}>Negative: {totals.negative}%</p>
+      </div>
+      <p style={{ marginBottom: 0 }}>{messageCount} messages total</p>
     </div>
   )
 }

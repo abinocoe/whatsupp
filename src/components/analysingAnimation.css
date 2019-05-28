@@ -5,6 +5,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
 }
 .lds-grid {
   display: flex;
@@ -17,7 +21,7 @@
   height: 24%;
   margin: 4%;
   border-radius: 50%;
-  background: coral;
+  background: #fbd2d7;
   animation: lds-grid 1.2s linear infinite;
 }
 .lds-grid div:nth-child(1) {
