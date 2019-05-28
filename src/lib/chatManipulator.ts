@@ -84,9 +84,9 @@ const calculateTotals = (object: { [key: string]: MessageObject }) => {
   Object.entries(object).forEach(([key, value]) => {
     if (value.analysisResponse) {
       value.analysisResponse.forEach((sentence: SentenceResponse) => {
-        if (sentence.sentiment.score >= 0.3) {
+        if (sentence.sentiment.score >= 0.2) {
           ++object[key].totals.positive
-        } else if (sentence.sentiment.score <= -0.3) {
+        } else if (sentence.sentiment.score <= -0.2) {
           ++object[key].totals.negative
         } else {
           ++object[key].totals.neutral
