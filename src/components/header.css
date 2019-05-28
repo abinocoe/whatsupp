@@ -1,0 +1,26 @@
+.semantic-header {
+  background: white;
+  margin-bottom: 1.45rem;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.content-container {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 1.45rem 1.0875rem;
+}
+
+.header-title {
+  margin: 0;
+}
+
+.header-link {
+  color: #e6a295;
+  text-decoration: none;
+}
+
+.header-subtitle {
+  font-weight: normal;
+  margin-top: 10px;
+  margin-bottom: 0;
+}

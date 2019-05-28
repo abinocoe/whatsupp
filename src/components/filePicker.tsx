@@ -7,6 +7,8 @@ import React, {
 
 import chatManipulator from "../lib/chatManipulator"
 
+import "./filePicker.css"
+
 interface HTMLInputEvent extends SyntheticEvent {
   target: HTMLInputElement & EventTarget
 }
@@ -50,9 +52,24 @@ const FilePicker: FunctionComponent<{
 
   return (
     <form onSubmit={onFormSubmit}>
-      <h1>File Upload</h1>
-      <input type="file" accept=".txt" onChange={onChange} />
-      <button type="submit">Upload</button>
+      <h1 className="form-title">File upload</h1>
+      <div className="form-container">
+        <label htmlFor="file_upload" className="label">
+          Choose file
+        </label>
+        <input
+          id="file_upload"
+          className="file-input"
+          type="file"
+          accept=".txt"
+          onChange={onChange}
+        />
+        {file && <span className="file-name">{file.name}</span>}
+      </div>
+
+      <button type="submit" className="upload-button">
+        Upload
+      </button>
     </form>
   )
 }

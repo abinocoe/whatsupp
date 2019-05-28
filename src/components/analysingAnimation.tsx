@@ -15,7 +15,7 @@ const AnalysingAnimation = () => (
       <div />
       <div />
     </div>
-    <p>analysing...</p>
+    <p>analysing your chat</p>
   </div>
 )
 

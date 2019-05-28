@@ -2,35 +2,23 @@
 import { Link } from "gatsby"
 import React from "react"
 
+import "./header.css"
+
 interface Props {
   siteTitle: string
 }
 
 const Header = ({ siteTitle = "" }: Props) => (
-  <header
-    style={{
-      background: `white`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `#fbd2d7`,
-            textDecoration: `none`,
-          }}
-        >
+  <header className="semantic-header">
+    <div className="content-container">
+      <h1 className="header-title">
+        <Link to="/" className="header-link">
           {siteTitle}
         </Link>
       </h1>
+      <h3 className="header-subtitle">
+        {"Analyse your whatsapp chats for positivity :)"}
+      </h3>
     </div>
   </header>
 )

@@ -1,18 +1,11 @@
 import React from "react"
 
 import ResultItem from "./resultItem"
+import "./results.css"
 
 const Results = ({ results }: any) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flex: 1,
-        flexDirection: "row",
-        flexWrap: "wrap",
-        justifyContent: "space-around",
-      }}
-    >
+    <div className="results-container">
       {Object.entries(results).map(([key, value]: any) => {
         return (
           <ResultItem

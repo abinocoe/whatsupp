@@ -1,5 +1,5 @@
 .result-card {
-  background-color: #f5f5f5;
+  background-color: white;
   border-radius: 10px;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -8,4 +8,16 @@
   margin-bottom: 30px;
   min-width: 30%;
   padding: 30px;
+}
+
+.positive {
+  color: limegreen;
+}
+
+.neutral {
+  color: darkorange;
+}
+
+.negative {
+  color: red;
 }
