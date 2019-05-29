@@ -1,5 +1,5 @@
 .animationContainer {
-  width: 100%;
+  max-width: 100%;
   display: flex;
   flex: 1 auto;
   justify-content: center;
@@ -60,7 +60,10 @@
     opacity: 0.5;
   }
 }
-.animation-container p {
-  color: grey;
-  margin-top: 10px;
+
+@media screen and (max-width: 860px) {
+  .animationContainer {
+    min-width: 400px;
+    height: 300px;
+  }
 }

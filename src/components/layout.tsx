@@ -32,7 +32,7 @@ const Layout = ({ children }: Props) => (
         <Header siteTitle={data.site.siteMetadata.title} />
         <div className="main-wrapper">
           <main>{children}</main>
-          <footer style={{ color: "white" }}>
+          <footer>
             © {new Date().getFullYear()}, Built by
             {` `}
             <a href="https://github.com/abinocoe">abinocoe</a>

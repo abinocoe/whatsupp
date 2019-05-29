@@ -51,26 +51,28 @@ const FilePicker: FunctionComponent<{
   }
 
   return (
-    <form onSubmit={onFormSubmit}>
-      <h1 className="form-title">File upload</h1>
-      <div className="form-container">
-        <label htmlFor="file_upload" className="label">
-          Choose file
-        </label>
-        <input
-          id="file_upload"
-          className="file-input"
-          type="file"
-          accept=".txt"
-          onChange={onChange}
-        />
-        {file && <span className="file-name">{file.name}</span>}
-      </div>
+    <div className="file-picker-container">
+      <form onSubmit={onFormSubmit} className="form">
+        <h1 className="form-title">File upload</h1>
+        <div className="form-container">
+          <label htmlFor="file_upload" className="label">
+            Choose file
+          </label>
+          <input
+            id="file_upload"
+            className="file-input"
+            type="file"
+            accept=".txt"
+            onChange={onChange}
+          />
+          {file && <span className="file-name">{file.name}</span>}
+        </div>
 
-      <button type="submit" className="upload-button">
-        Upload
-      </button>
-    </form>
+        <button type="submit" className="upload-button">
+          Upload
+        </button>
+      </form>
+    </div>
   )
 }
 

@@ -16,3 +16,15 @@
 h2 {
   text-align: center;
 }
+
+@media screen and (max-width: 860px) {
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .upload-instructions {
+    width: 400px;
+  }
+}

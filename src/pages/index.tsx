@@ -7,25 +7,22 @@ import Layout from "../components/layout"
 import Results from "../components/results"
 import SEO from "../components/seo"
 
+import "./index.css"
+
 const IndexPage = () => {
   const [results, setResult] = useState(null)
   const [analysing, setAnalysing] = useState(false)
   return (
     <Layout>
       <SEO title="Home" keywords={[`application`, `react`]} />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          minHeight: 400,
-        }}
-      >
-        {!results && !analysing && <Instructions />}
-        {analysing && <AnalysingAnimation />}
-        {results && !analysing && <Results results={results} />}
+      <div className="body-content">
+        <div className="card-content">
+          {!results && !analysing && <Instructions />}
+          {analysing && <AnalysingAnimation />}
+          {results && !analysing && <Results results={results} />}
+        </div>
+        <FilePicker updateResults={setResult} updateAnalysing={setAnalysing} />
       </div>
-      <FilePicker updateResults={setResult} updateAnalysing={setAnalysing} />
     </Layout>
   )
 }

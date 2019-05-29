@@ -21,3 +21,9 @@
 .negative {
   color: red;
 }
+
+@media screen and (max-width: 860px) {
+  .result-card {
+    min-width: 350px;
+  }
+}

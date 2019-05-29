@@ -5,3 +5,10 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
+@media screen and (max-width: 860px) {
+  .results-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
