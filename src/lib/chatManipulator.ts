@@ -1,10 +1,17 @@
 import { post } from "axios"
 
+import { NLKEY } from "../../config"
+
 interface MessageObject {
   messages: string
   count: number
-  analysisResponse?: any
+  analysisResponse?: SentenceResponse[]
   totals: { positive: number; neutral: number; negative: number }
+}
+
+interface SentenceResponse {
+  sentiment: { magnitude: number; score: number }
+  text: { beginOffset: number; content: string }
 }
 
 const chatManipulator = async (text: string) => {
@@ -56,9 +63,7 @@ const populateMessageArrays = (messageArray: string[]) => {
 const sendToAPI = (object: { [key: string]: MessageObject }) => {
   const array = Object.entries(object).map(async ([key, value]) => {
     object[key].analysisResponse = await post(
-      `https://language.googleapis.com/v1/documents:analyzeSentiment?key=${
-        process.env.NATURAL_LANGUAGE_API_KEY
-      }`,
+      `https://language.googleapis.com/v1/documents:analyzeSentiment?key=${NLKEY}`,
       {
         document: {
           content: value.messages,
@@ -77,23 +82,25 @@ const sendToAPI = (object: { [key: string]: MessageObject }) => {
 
 const calculateTotals = (object: { [key: string]: MessageObject }) => {
   Object.entries(object).forEach(([key, value]) => {
-    value.analysisResponse.forEach((sentence: any) => {
-      if (sentence.sentiment.score >= 0.3) {
-        ++object[key].totals.positive
-      } else if (sentence.sentiment.score <= -0.3) {
-        ++object[key].totals.negative
-      } else {
-        ++object[key].totals.neutral
-      }
-    })
-    const totalResults = Object.values(object[key].totals).reduce(
-      (acc, curr) => acc + curr,
-      0
-    )
-    Object.entries(object[key].totals).forEach(([k, v]) => {
-      // @ts-ignore
-      object[key].totals[k] = ((v / totalResults) * 100).toFixed(1)
-    })
+    if (value.analysisResponse) {
+      value.analysisResponse.forEach((sentence: SentenceResponse) => {
+        if (sentence.sentiment.score >= 0.2) {
+          ++object[key].totals.positive
+        } else if (sentence.sentiment.score <= -0.2) {
+          ++object[key].totals.negative
+        } else {
+          ++object[key].totals.neutral
+        }
+      })
+      const totalResults = Object.values(object[key].totals).reduce(
+        (acc, curr) => acc + curr,
+        0
+      )
+      Object.entries(object[key].totals).forEach(([k, v]) => {
+        // @ts-ignore
+        object[key].totals[k] = ((v / totalResults) * 100).toFixed(1)
+      })
+    }
   })
   return object
 }

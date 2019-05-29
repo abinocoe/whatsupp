@@ -1,0 +1,19 @@
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 400px;
+  order: 1;
+}
+
+.body-content {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 860px) {
+  .card-content {
+    align-items: center;
+    order: 2;
+  }
+}
