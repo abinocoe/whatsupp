@@ -22,14 +22,15 @@ const chatManipulator = async (text: string) => {
   return withPercentages
 }
 
-const splitIntoMessages = (chat: string) => {
-  const array = chat
-    .toString()
-    .split(/\n/)
-    .slice(1)
+export const splitIntoMessages = (chat: string) => {
+  const array = chat.toString().split(/\n/)
 
-  const result = array.map(message => message.split(/\-\s/).slice(1)[0])
-
+  const result = array.map(message => {
+    const [, ...withoutDate] = message.split(/\-\s/)
+    const messageString =
+      withoutDate.length > 1 ? withoutDate.join("- ") : withoutDate[0]
+    return messageString
+  })
   return result
 }
 
@@ -52,7 +53,7 @@ const populateMessageArrays = (messageArray: string[]) => {
       }
       messagesByNames[messageSenderName].messages = messagesByNames[
         messageSenderName
-      ].messages.concat(`${messageSenderMessage.join(" ")} `)
+      ].messages.concat(`${messageSenderMessage.join(":")} `)
       ++messagesByNames[messageSenderName].count
     }
   })
