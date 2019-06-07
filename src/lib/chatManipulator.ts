@@ -1,4 +1,4 @@
-import { post } from "axios"
+import axios from "axios"
 
 import { NLKEY } from "../../config"
 
@@ -34,7 +34,7 @@ export const splitIntoMessages = (chat: string) => {
   return result
 }
 
-const populateMessageArrays = (messageArray: string[]) => {
+export const populateMessageArrays = (messageArray: string[]) => {
   const messagesByNames: { [key: string]: MessageObject } = {}
 
   messageArray.forEach(message => {
@@ -53,7 +53,7 @@ const populateMessageArrays = (messageArray: string[]) => {
       }
       messagesByNames[messageSenderName].messages = messagesByNames[
         messageSenderName
-      ].messages.concat(`${messageSenderMessage.join(":")} `)
+      ].messages.concat(`${messageSenderMessage.join(": ")}. `)
       ++messagesByNames[messageSenderName].count
     }
   })
@@ -61,27 +61,30 @@ const populateMessageArrays = (messageArray: string[]) => {
   return messagesByNames
 }
 
-const sendToAPI = (object: { [key: string]: MessageObject }) => {
-  const array = Object.entries(object).map(async ([key, value]) => {
-    object[key].analysisResponse = await post(
-      `https://language.googleapis.com/v1/documents:analyzeSentiment?key=${NLKEY}`,
-      {
-        document: {
-          content: value.messages,
-          type: "PLAIN_TEXT",
-        },
-        encodingType: "UTF8",
-      }
-    ).then(
-      (response: any) =>
-        (object[key].analysisResponse = response.data.sentences)
-    )
+export const sendToAPI = async (object: { [key: string]: MessageObject }) => {
+  const array = Object.entries(object).map(([key, value]) => {
+    return axios
+      .post(
+        `https://language.googleapis.com/v1/documents:analyzeSentiment?key=${NLKEY}`,
+        {
+          document: {
+            content: value.messages,
+            type: "PLAIN_TEXT",
+          },
+          encodingType: "UTF8",
+        }
+      )
+      .then(
+        (response: any) =>
+          (object[key].analysisResponse = response.data.sentences)
+      )
   })
 
-  return Promise.all(array).then(() => object)
+  await Promise.all(array)
+  return object
 }
 
-const calculateTotals = (object: { [key: string]: MessageObject }) => {
+export const calculateTotals = (object: { [key: string]: MessageObject }) => {
   Object.entries(object).forEach(([key, value]) => {
     if (value.analysisResponse) {
       value.analysisResponse.forEach((sentence: SentenceResponse) => {
