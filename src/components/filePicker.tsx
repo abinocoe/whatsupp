@@ -7,16 +7,21 @@ import React, {
 
 import chatManipulator from "../lib/chatManipulator"
 
+import "./filePicker.css"
+
 interface HTMLInputEvent extends SyntheticEvent {
   target: HTMLInputElement & EventTarget
 }
 
-const FilePicker: FunctionComponent = () => {
-  let fileReader: FileReader;
+const FilePicker: FunctionComponent<{
+  updateResults: (results: any) => void
+  updateAnalysing: (isAnalysing: boolean) => void
+}> = ({ updateAnalysing, updateResults }) => {
+  let fileReader: FileReader
   if (typeof window !== `undefined`) {
     fileReader = new FileReader()
   }
-  
+
   const [file, setFile] = useState<File>()
 
   // tslint:disable-next-line: variable-name
@@ -24,8 +29,10 @@ const FilePicker: FunctionComponent = () => {
     const result = fileReader.result
     let manipulatedResult
     if (typeof result === "string") {
+      updateAnalysing(true)
       manipulatedResult = await chatManipulator(result)
-      console.log(manipulatedResult)
+      updateResults(manipulatedResult)
+      updateAnalysing(false)
     }
   }
 
@@ -44,11 +51,28 @@ const FilePicker: FunctionComponent = () => {
   }
 
   return (
-    <form onSubmit={onFormSubmit}>
-      <h1>File Upload</h1>
-      <input type="file" accept=".txt" onChange={onChange} />
-      <button type="submit">Upload</button>
-    </form>
+    <div className="file-picker-container">
+      <form onSubmit={onFormSubmit} className="form">
+        <h1 className="form-title">File upload</h1>
+        <div className="form-container">
+          <label htmlFor="file_upload" className="label">
+            Choose file
+          </label>
+          <input
+            id="file_upload"
+            className="file-input"
+            type="file"
+            accept=".txt"
+            onChange={onChange}
+          />
+          {file && <span className="file-name">{file.name}</span>}
+        </div>
+
+        <button type="submit" className="upload-button">
+          Upload
+        </button>
+      </form>
+    </div>
   )
 }
 
